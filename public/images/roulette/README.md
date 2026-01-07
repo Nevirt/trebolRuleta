@@ -6,10 +6,11 @@ Esta carpeta contiene todos los assets visuales de la ruleta.
 
 ```
 roulette/
-├── border-green.png          # Contorno verde de la ruleta (borde exterior)
+├── wheel-complete.png        # ⭐ RULETA COMPLETA (imagen principal - ACTIVA)
 ├── center-logo.png           # Logo central de Helados Trébol (blanco)
+├── border-green.png          # Contorno verde de la ruleta (borde exterior - opcional)
 ├── center-logo-hover.png     # Logo central cuando se hace hover (opcional)
-├── pointer.png               # Indicador/puntero superior (triángulo rojo)
+├── pointer.png               # Indicador/puntero superior (triángulo rojo - opcional)
 ├── segments/
 │   ├── segment-1.png         # Segmento 1 (Rosa - "Tenés otro intento")
 │   ├── segment-2.png         # Segmento 2 (Gris - "Cucharita + Stickers")
@@ -18,7 +19,7 @@ roulette/
 │   ├── segment-5.png         # Segmento 5 (Denim - "Un llavero")
 │   └── segment-6.png         # Segmento 6 (Gris - "Una toallita")
 └── skeleton/
-    └── wheel-skeleton.png    # Esqueleto/base de la ruleta (opcional)
+    └── wheel-skeleton.svg    # Esqueleto/fallback de la ruleta
 ```
 
 ## 📝 Notas

@@ -207,9 +207,24 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#f5f5f5',
           position: 'relative',
           overflow: 'hidden',
+          // Imagen de fondo
+          backgroundImage: 'url(/images/roulette/fondo-helado.avif)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          // Overlay sutil para mejor contraste
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.75)', // Overlay blanco semi-transparente
+            zIndex: 0,
+          },
         }}
       >
         {/* Contenedor de la ruleta */}
@@ -233,6 +248,7 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            zIndex: 1, // Por encima del fondo
           }}
         >
           {/* Ruleta SVG completa - ROTA */}
@@ -250,16 +266,19 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
               justifyContent: 'center',
             }}
           >
-            <Box
-              component="img"
-              src="/images/roulette/wheel-complete.svg"
+            <Image
+              src="/images/roulette/wheel-complete.png"
               alt="Ruleta Helados Trébol"
+              width={700}
+              height={700}
+              priority
+              quality={isMobile ? 85 : 95}
               onError={(e) => {
-                // Fallback si el SVG no carga
+                // Fallback si el PNG no carga
                 const target = e.target as HTMLImageElement
                 target.src = '/images/roulette/skeleton/wheel-skeleton.svg'
               }}
-              sx={{
+              style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain',
@@ -692,9 +711,10 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
               maxWidth: '500px',
               textAlign: 'center',
               padding: { xs: '15px', sm: '20px' },
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '10px',
               boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+              zIndex: 1, // Por encima del fondo
             }}
           >
             <Typography variant="h6" color="error" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
