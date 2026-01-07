@@ -209,22 +209,7 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
           justifyContent: 'center',
           position: 'relative',
           overflow: 'hidden',
-          // Imagen de fondo
-          backgroundImage: 'url(/images/roulette/fondo-helado.avif)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          // Overlay sutil para mejor contraste
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(255, 255, 255, 0.75)', // Overlay blanco semi-transparente
-            zIndex: 0,
-          },
+          backgroundColor: '#fffac6', // Color crema/amarillo claro
         }}
       >
         {/* Contenedor de la ruleta */}
