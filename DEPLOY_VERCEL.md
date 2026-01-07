@@ -20,12 +20,41 @@ git push origin main
 
 O desde Vercel Dashboard: **Deploy**
 
-### 3. Inicializar Premios en Producción
+### 3. Crear Tablas e Inicializar Premios en Producción
 
-Ve a [Neon Console](https://console.neon.tech) y ejecuta este SQL en tu base de datos de producción:
+Ve a [Neon Console](https://console.neon.tech) → **SQL Editor** y ejecuta este SQL completo:
 
 ```sql
--- Insertar premios reales
+-- ================================================
+-- PASO 1: Crear las tablas
+-- ================================================
+
+-- Tabla de premios
+CREATE TABLE IF NOT EXISTS prizes (
+  id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
+  name TEXT NOT NULL,
+  "quantityTotal" INTEGER NOT NULL,
+  "quantityRemaining" INTEGER NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de giros (historial)
+CREATE TABLE IF NOT EXISTS spins (
+  id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
+  "prizeId" TEXT NOT NULL,
+  "prizeName" TEXT NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_prize FOREIGN KEY ("prizeId") REFERENCES prizes(id) ON DELETE CASCADE
+);
+
+-- Índices para mejor rendimiento
+CREATE INDEX IF NOT EXISTS idx_spins_prizeId ON spins("prizeId");
+CREATE INDEX IF NOT EXISTS idx_spins_createdAt ON spins("createdAt");
+
+-- ================================================
+-- PASO 2: Insertar premios iniciales
+-- ================================================
+
 INSERT INTO prizes (name, "quantityTotal", "quantityRemaining")
 VALUES 
   ('Cucharita + Stickers', 100, 100),
@@ -36,7 +65,7 @@ VALUES
   ('Suerte la próxima', 999999, 999999);
 ```
 
-**¡Listo!** Tu ruleta ya funcionará con todos los premios inicializados.
+**¡Listo!** Tu base de datos estará completamente configurada con tablas y premios.
 
 ## 📝 Variables de Entorno Necesarias
 
