@@ -24,6 +24,17 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
   const [prizes, setPrizes] = useState<Prize[]>([])
   const [loadingPrizes, setLoadingPrizes] = useState(true)
   const [mounted, setMounted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Detectar si es mobile para optimizar animaciones
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Cargar premios disponibles (deben estar en el orden correcto)
   useEffect(() => {
@@ -134,7 +145,7 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
   }
 
   const animateRotation = (totalRotation: number, prize?: Prize) => {
-    const duration = 3000 // 3 segundos
+    const duration = isMobile ? 2500 : 3000 // Más rápido en mobile para mejor performance
     const startTime = Date.now()
     const startRotation = rotation
 
@@ -204,8 +215,18 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
         {/* Contenedor de la ruleta */}
         <Box
           sx={{
-            width: 'min(85vw, 700px)',
-            height: 'min(85vw, 700px)',
+            width: {
+              xs: 'min(90vw, 400px)',  // Mobile: más pequeño
+              sm: 'min(80vw, 500px)',  // Tablet
+              md: 'min(70vw, 600px)',  // Desktop pequeño
+              lg: 'min(85vw, 700px)',  // Desktop grande
+            },
+            height: {
+              xs: 'min(90vw, 400px)',
+              sm: 'min(80vw, 500px)',
+              md: 'min(70vw, 600px)',
+              lg: 'min(85vw, 700px)',
+            },
             maxWidth: '700px',
             maxHeight: '700px',
             position: 'relative',
@@ -259,8 +280,8 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
                 {/* ⭐ EXPLOSIÓN DE CONFETI ESPECTACULAR PARA PREMIOS REALES ⭐ */}
                 {isRealPrize && (
                   <>
-                    {/* 🎊 CONFETI EXPLOSIÓN DESDE LA IZQUIERDA - 25 partículas */}
-                    {[...Array(25)].map((_, i) => {
+                    {/* 🎊 CONFETI EXPLOSIÓN DESDE LA IZQUIERDA - Optimizado para mobile */}
+                    {[...Array(isMobile ? 12 : 25)].map((_, i) => {
                       const colors = ['#FFD700', '#FF6B6B', '#4CAF50', '#2196F3', '#FF1744', '#00E676', '#FFC107', '#E91E63', '#9C27B0', '#FF9800']
                       const color = colors[i % colors.length]
                       const delay = i * 0.02 // Explosión más rápida y continua
@@ -325,8 +346,8 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
                       )
                     })}
                     
-                    {/* 🎊 CONFETI EXPLOSIÓN DESDE LA DERECHA - 25 partículas */}
-                    {[...Array(25)].map((_, i) => {
+                    {/* 🎊 CONFETI EXPLOSIÓN DESDE LA DERECHA - Optimizado para mobile */}
+                    {[...Array(isMobile ? 12 : 25)].map((_, i) => {
                       const colors = ['#FFD700', '#FF6B6B', '#4CAF50', '#2196F3', '#FF1744', '#00E676', '#FFC107', '#E91E63', '#9C27B0', '#FF9800']
                       const color = colors[i % colors.length]
                       const delay = i * 0.02
@@ -383,7 +404,7 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
                     })}
                     
                     {/* ⭐ ESTRELLAS BRILLANTES QUE EMERGEN Y FLOTAN */}
-                    {[...Array(8)].map((_, i) => {
+                    {[...Array(isMobile ? 4 : 8)].map((_, i) => {
                       const angle = (i * 360) / 8 // Distribuir en círculo
                       const distance = 180 + (i % 3) * 40
                       const delay = 0.3 + i * 0.05
@@ -548,8 +569,18 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '180px',
-              height: '180px',
+              width: {
+                xs: '100px',   // Mobile: más pequeño
+                sm: '130px',   // Tablet
+                md: '160px',   // Desktop pequeño
+                lg: '180px',   // Desktop grande
+              },
+              height: {
+                xs: '100px',
+                sm: '130px',
+                md: '160px',
+                lg: '180px',
+              },
               zIndex: 10,
               display: 'flex',
               alignItems: 'center',
@@ -654,18 +685,22 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
           <Box
             sx={{
               position: 'absolute',
-              bottom: '50px',
+              bottom: { xs: '20px', sm: '50px' },
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: { xs: '90%', sm: 'auto' },
+              maxWidth: '500px',
               textAlign: 'center',
-              padding: '20px',
+              padding: { xs: '15px', sm: '20px' },
               backgroundColor: 'rgba(255, 255, 255, 0.9)',
               borderRadius: '10px',
               boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
             }}
           >
-            <Typography variant="h6" color="error">
+            <Typography variant="h6" color="error" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
               No hay premios disponibles
             </Typography>
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="body2" color="textSecondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
               Por favor, inicializa los premios predeterminados ejecutando: npm run db:init-prizes
             </Typography>
           </Box>

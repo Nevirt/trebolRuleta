@@ -158,7 +158,7 @@ export default function AdminPage() {
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, px: { xs: 2, sm: 3 } }}>
         {error && (
           <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError(null)}>
             {error}
@@ -195,21 +195,36 @@ export default function AdminPage() {
             <CircularProgress />
           </Box>
         ) : (
-          <TableContainer component={Paper}>
-            <Table>
+          <TableContainer 
+            component={Paper}
+            sx={{
+              overflowX: 'auto',
+              '&::-webkit-scrollbar': {
+                height: '8px',
+              },
+              '&::-webkit-scrollbar-track': {
+                backgroundColor: '#f1f1f1',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                backgroundColor: '#4CAF50',
+                borderRadius: '4px',
+              },
+            }}
+          >
+            <Table sx={{ minWidth: 650 }}>
               <TableHead>
                 <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-                  <TableCell sx={{ fontWeight: 'bold' }}>Premio</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold' }} align="center">
+                  <TableCell sx={{ fontWeight: 'bold', minWidth: 150 }}>Premio</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', minWidth: 100 }} align="center">
                     Tipo
                   </TableCell>
-                  <TableCell sx={{ fontWeight: 'bold' }} align="right">
+                  <TableCell sx={{ fontWeight: 'bold', minWidth: 120 }} align="right">
                     Cantidad Total
                   </TableCell>
-                  <TableCell sx={{ fontWeight: 'bold' }} align="right">
+                  <TableCell sx={{ fontWeight: 'bold', minWidth: 120 }} align="right">
                     Stock Restante
                   </TableCell>
-                  <TableCell sx={{ fontWeight: 'bold' }} align="center">
+                  <TableCell sx={{ fontWeight: 'bold', minWidth: 80 }} align="center">
                     Acción
                   </TableCell>
                 </TableRow>

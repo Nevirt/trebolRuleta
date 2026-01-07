@@ -36,7 +36,7 @@ export default function PrizeModal({ open, prize, isPrize, onClose }: PrizeModal
         sx={{
           backgroundColor: '#fff',
           borderRadius: '20px',
-          padding: '40px',
+          padding: { xs: '25px', sm: '40px' },
           maxWidth: '400px',
           width: '90%',
           textAlign: 'center',
@@ -49,8 +49,8 @@ export default function PrizeModal({ open, prize, isPrize, onClose }: PrizeModal
             <Box
               sx={{
                 position: 'relative',
-                width: '120px',
-                height: '120px',
+                width: { xs: '90px', sm: '120px' },
+                height: { xs: '90px', sm: '120px' },
                 margin: '0 auto 15px',
                 animation: 'logo-entrance 0.8s ease-out',
                 '@keyframes logo-entrance': {
@@ -87,7 +87,7 @@ export default function PrizeModal({ open, prize, isPrize, onClose }: PrizeModal
             {/* Ícono de celebración más pequeño */}
             <Celebration
               sx={{
-                fontSize: '60px',
+                fontSize: { xs: '45px', sm: '60px' },
                 color: '#FFD700',
                 marginBottom: '15px',
                 animation: 'bounce 0.6s ease-in-out 0.3s',
@@ -104,6 +104,7 @@ export default function PrizeModal({ open, prize, isPrize, onClose }: PrizeModal
                 fontWeight: 'bold',
                 marginBottom: '10px',
                 color: '#333',
+                fontSize: { xs: '1.5rem', sm: '2rem' },
                 animation: 'fade-in 0.5s ease-in 0.4s both',
                 '@keyframes fade-in': {
                   '0%': { opacity: 0, transform: 'translateY(10px)' },
@@ -120,6 +121,7 @@ export default function PrizeModal({ open, prize, isPrize, onClose }: PrizeModal
                 color: '#4CAF50',
                 marginBottom: '30px',
                 fontWeight: '600',
+                fontSize: { xs: '1.1rem', sm: '1.5rem' },
                 animation: 'fade-in 0.5s ease-in 0.5s both',
                 '@keyframes fade-in': {
                   '0%': { opacity: 0, transform: 'translateY(10px)' },
