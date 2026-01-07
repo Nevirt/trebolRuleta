@@ -287,6 +287,29 @@ export default function AdminPage() {
             </Table>
           </TableContainer>
         )}
+
+        {/* Footer discreto */}
+        <Box
+          sx={{
+            mt: 6,
+            pt: 2,
+            pb: 2,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Typography
+            variant="caption"
+            sx={{
+              fontSize: '0.65rem',
+              color: 'rgba(0, 0, 0, 0.4)',
+              textAlign: 'center',
+            }}
+          >
+            © derechos reservados by Innomia
+          </Typography>
+        </Box>
       </Container>
 
       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>

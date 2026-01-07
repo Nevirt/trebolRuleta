@@ -710,6 +710,33 @@ export default function Roulette({ onSpinComplete }: RouletteProps) {
             </Typography>
           </Box>
         )}
+
+        {/* Footer discreto con Copyright */}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            padding: '8px 16px',
+            backgroundColor: '#fffac6', // Mismo color del fondo
+            zIndex: 1,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Typography
+            variant="caption"
+            sx={{
+              fontSize: '0.65rem',
+              color: 'rgba(0, 0, 0, 0.4)',
+              textAlign: 'center',
+            }}
+          >
+            © derechos reservados by Innomia
+          </Typography>
+        </Box>
       </Box>
 
       <PrizeModal
