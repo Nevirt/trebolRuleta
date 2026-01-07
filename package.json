@@ -1,0 +1,38 @@
+{
+  "name": "trebol-ruleta",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:generate": "prisma generate",
+    "db:setup": "node scripts/db-setup.js",
+    "db:init-prizes": "node scripts/init-default-prizes.js",
+    "env:dev": "node scripts/set-env.js development",
+    "env:prod": "node scripts/set-env.js production",
+    "env:check": "node scripts/check-env.js"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
+    "@prisma/client": "^5.9.0",
+    "exceljs": "^4.4.0",
+    "next": "^16.1.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "prisma": "^5.9.0",
+    "typescript": "^5"
+  }
+}
