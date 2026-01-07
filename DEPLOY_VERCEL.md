@@ -1,6 +1,6 @@
 # Desplegar en Vercel - Helados Trébol Ruleta
 
-## 🚀 Pasos Rápidos
+## 🚀 Pasos para Desplegar
 
 ### 1. Variables de Entorno en Vercel
 
@@ -12,43 +12,17 @@ DATABASE_URL=postgresql://[USER]:[PASSWORD]@[HOST]/[DATABASE]?sslmode=require
 
 **IMPORTANTE:** Usa la URL de la base de datos de PRODUCCIÓN (ep-gentle-cell-ac7k8ivc-pooler)
 
-### 2. Inicializar Premios en Producción
+### 2. Despliega en Vercel
 
-Después de desplegar, **visita esta URL una sola vez**:
-
-```
-https://tu-sitio.vercel.app/api/init-prizes-prod
+```bash
+git push origin main
 ```
 
-✅ Verás un mensaje JSON confirmando que los premios se inicializaron
+O desde Vercel Dashboard: **Deploy**
 
-🗑️ **Después de inicializar, elimina el archivo**: `app/api/init-prizes-prod/route.ts`
+### 3. Inicializar Premios en Producción
 
----
-
-## 🛠️ Otras opciones (si la primera no funciona)
-
-#### Opción 1: Desde tu computadora local (RECOMENDADO)
-
-1. Conecta temporalmente a la base de datos de producción:
-   ```bash
-   # En tu archivo .env.local
-   DATABASE_URL="postgresql://neondb_owner:tu_password@ep-gentle-cell-ac7k8ivc-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
-   ```
-
-2. Ejecuta el script de inicialización:
-   ```bash
-   npm run db:init-prizes
-   ```
-
-3. **IMPORTANTE:** Vuelve a cambiar tu `.env.local` a desarrollo después
-
-#### Opción 2: Usando Neon Console
-
-1. Ve a [https://console.neon.tech](https://console.neon.tech)
-2. Selecciona tu proyecto de producción (ep-gentle-cell-ac7k8ivc)
-3. Ve a **SQL Editor**
-4. Ejecuta estas queries:
+Ve a [Neon Console](https://console.neon.tech) y ejecuta este SQL en tu base de datos de producción:
 
 ```sql
 -- Insertar premios reales
@@ -57,19 +31,12 @@ VALUES
   ('Cucharita + Stickers', 100, 100),
   ('Un llavero', 80, 80),
   ('Un sombrerito', 60, 60),
-  ('Una toallita', 50, 50);
-
--- Insertar opciones sin premio (cantidad ilimitada)
-INSERT INTO prizes (name, "quantityTotal", "quantityRemaining")
-VALUES 
+  ('Una toallita', 50, 50),
   ('Tenés otro intento', 999999, 999999),
   ('Suerte la próxima', 999999, 999999);
 ```
 
-#### Opción 3: Crear un endpoint de inicialización
-
-1. Agrega un endpoint temporal en tu app (ya eliminarlo después)
-2. Visita la URL para inicializar
+**¡Listo!** Tu ruleta ya funcionará con todos los premios inicializados.
 
 ## 📝 Variables de Entorno Necesarias
 
